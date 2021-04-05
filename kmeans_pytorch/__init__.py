@@ -77,6 +77,9 @@ def kmeans(
     if tqdm_flag:
         tqdm_meter = tqdm(desc='[running kmeans]')
     while True:
+        
+        if torch.isnan(selected.mean(dim=0)).sum()==0:
+            initial_state[index] = selected.mean(dim=0)
 
         dis = pairwise_distance_function(X, initial_state)
 
