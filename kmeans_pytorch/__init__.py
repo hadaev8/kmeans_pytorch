@@ -117,7 +117,7 @@ def kmeans(
         if iter_limit != 0 and iteration >= iter_limit:
             break
 
-    return choice_cluster.cpu(), initial_state.cpu()
+    return choice_cluster, initial_state
 
 
 def kmeans_predict(
@@ -157,11 +157,10 @@ def kmeans_predict(
     dis = pairwise_distance_function(X, cluster_centers)
     choice_cluster = torch.argmin(dis, dim=1)
 
-    return choice_cluster.cpu()
+    return choice_cluster
 
 
 def pairwise_distance(data1, data2, device=torch.device('cpu')):
-    print(f'device is :{device}')
     
     # transfer to device
     data1, data2 = data1.to(device), data2.to(device)
